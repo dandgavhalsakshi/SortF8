@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Activity Audit Logs</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Member Activity Log</h2>
+        <table id="auditLogTable" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>User</th>
+                    <th>Activity</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="auditLogBody">
+                <!-- Logs will be dynamically populated -->
+            </tbody>
+        </table>
+        <div class="form-group" style="margin-top: 20px;">
+            <label for="filterActivity">Filter Activities</label>
+            <select id="filterActivity" class="form-control">
+                <option value="all">All Activities</option>
+                <option value="login">Login</option>
+                <option value="logout">Logout</option>
+                <option value="update">Profile Update</option>
+                <option value="consent">Consent Changes</option>
+            </select>
+        </div>
+    </div>
+    <script src="scripts/auditLogs.js"></script>
+</body>
+</html>

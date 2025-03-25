@@ -1,0 +1,75 @@
+/* styles/membership-agreement.css */
+.membership-agreement-container {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.agreement-text {
+    background-color: white;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.agreement-text ul {
+    padding-left: 20px;
+}
+
+.signature-section {
+    margin-bottom: 20px;
+}
+
+#signature-pad {
+    border: 2px dashed #cccccc;
+    background-color: white;
+    cursor: crosshair;
+}
+
+.signature-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.signature-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#clear-signature {
+    background-color: #f44336;
+    color: white;
+}
+
+#save-signature {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.member-details {
+    display: grid;
+    gap: 10px;
+}
+
+.member-details input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+}
+
+.agreement-status {
+    background-color: #e7f3fe;
+    border: 1px solid #b6d4fe;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+}

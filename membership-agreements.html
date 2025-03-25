@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Membership Agreements</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Digital Membership Agreement</h2>
+        <form id="membershipForm">
+            <div class="form-group">
+                <label for="memberName">Full Name</label>
+                <input type="text" id="memberName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="memberType">Membership Type</label>
+                <select id="memberType" class="form-control">
+                    <option value="standard">Standard Membership</option>
+                    <option value="premium">Premium Membership</option>
+                    <option value="enterprise">Enterprise Membership</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Membership Agreement</label>
+                <div style="height: 200px; overflow-y: scroll; border: 1px solid #ddd; padding: 10px;">
+                    [Full Membership Agreement Text]
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" id="agreementAccept" required>
+                <label for="agreementAccept">I have read and agree to the membership terms</label>
+            </div>
+            <div class="form-group">
+                <label for="digitalSignature">Digital Signature</label>
+                <canvas id="signatureCanvas" style="border: 1px solid #000; width: 100%; height: 150px;"></canvas>
+                <button type="button" id="clearSignature" class="btn">Clear Signature</button>
+            </div>
+            <button type="submit" class="btn">Submit Membership Agreement</button>
+        </form>
+    </div>
+    <script src="scripts/memberAgreements.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GDPR Compliance</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>GDPR Data Privacy Consent</h2>
+        <form id="gdprForm">
+            <div class="form-group">
+                <label for="dataConsent">
+                    <input type="checkbox" id="dataConsent" required>
+                    I consent to the collection and processing of my personal data
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="dataTypes">Types of Data Collected</label>
+                <select multiple id="dataTypes" class="form-control">
+                    <option value="name">Name</option>
+                    <option value="email">Email</option>
+                    <option value="address">Address</option>
+                    <option value="phone">Phone Number</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="purposeConsent">Purpose of Data Processing</label>
+                <textarea id="purposeConsent" class="form-control" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="dataRetention">Data Retention Period</label>
+                <input type="number" id="dataRetention" class="form-control" min="1" max="10" placeholder="Years">
+            </div>
+            <button type="submit" class="btn">Submit GDPR Consent</button>
+        </form>
+    </div>
+    <script src="scripts/gdprCompliance.js"></script>
+</body>
+</html>

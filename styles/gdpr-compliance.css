@@ -1,0 +1,47 @@
+/* styles/gdpr-compliance.css */
+#gdpr-consent-form {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.consent-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.consent-section input[type="checkbox"] {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+}
+
+.consent-section label {
+    flex-grow: 1;
+    color: #333;
+}
+
+.consent-section input[type="checkbox"]:disabled {
+    background-color: #cccccc;
+}
+
+#save-gdpr-consent {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#save-gdpr-consent:hover {
+    background-color: #45a049;
+}
