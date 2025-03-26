@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Tracking Entry</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-6">
+                <h1 class="text-3xl font-bold text-white">New Compliance Tracking Entry</h1>
+            </div>
+            
+            <div class="p-6 grid md:grid-cols-2 gap-6">
+                <!-- Compliance Entry Form -->
+                <div>
+                    <form id="complianceForm" class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 font-bold mb-2">Document Type</label>
+                            <select class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>Terms of Service</option>
+                                <option>Privacy Policy</option>
+                                <option>User Agreement</option>
+                                <option>Data Processing Agreement</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-bold mb-2">Compliance Status</label>
+                            <div class="flex space-x-4">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" class="form-radio" name="status" value="draft">
+                                    <span class="ml-2">Draft</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" class="form-radio" name="status" value="review">
+                                    <span class="ml-2">Under Review</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" class="form-radio" name="status" value="approved">
+                                    <span class="ml-2">Approved</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-bold mb-2">Upload Document</label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                                <input type="file" id="documentUpload" class="hidden">
+                                <label for="documentUpload" class="cursor-pointer">
+                                    <div class="flex flex-col items-center">
+                                        <i data-feather="upload-cloud" class="text-gray-500 h-12 w-12 mb-4"></i>
+                                        <p class="text-gray-600">Drag and drop or click to upload</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-bold mb-2">Additional Notes</label>
+                            <textarea class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4" placeholder="Enter any additional compliance notes"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-300">
+                            Submit Compliance Entry
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Compliance Stats -->
+                <div>
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-4">Compliance Overview</h3>
+                        <canvas id="complianceChart"></canvas>
+                    </div>
+                    
+                    <div class="mt-6 grid grid-cols-2 gap-4">
+                        <div class="bg-green-50 p-4 rounded-lg text-center">
+                            <h4 class="text-green-800 font-bold text-2xl">24</h4>
+                            <p class="text-green-600">Approved Docs</p>
+                        </div>
+                        <div class="bg-yellow-50 p-4 rounded-lg text-center">
+                            <h4 class="text-yellow-800 font-bold text-2xl">7</h4>
+                            <p class="text-yellow-600">Under Review</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Feather Icons
+        feather.replace();
+
+        // Compliance Chart
+        const ctx = document.getElementById('complianceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Approved', 'Under Review', 'Draft'],
+                datasets: [{
+                    data: [24, 7, 5],
+                    backgroundColor: [
+                        'rgba(34, 197, 94, 0.7)',
+                        'rgba(245, 158, 11, 0.7)',
+                        'rgba(59, 130, 246, 0.7)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

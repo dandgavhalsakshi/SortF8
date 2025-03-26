@@ -2,39 +2,231 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>GDPR Compliance</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDPR Data Privacy Consent</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+        .consent-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .consent-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
 </head>
-<body>
-    <div class="form-container">
-        <h2>GDPR Data Privacy Consent</h2>
-        <form id="gdprForm">
-            <div class="form-group">
-                <label for="dataConsent">
-                    <input type="checkbox" id="dataConsent" required>
-                    I consent to the collection and processing of my personal data
-                </label>
+<body class="min-h-screen flex items-center justify-center px-4">
+    <div class="w-full max-w-2xl">
+        <div class="bg-white consent-card rounded-xl overflow-hidden shadow-2xl">
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-6">
+                <div class="flex items-center">
+                    <i data-feather="shield" class="text-white mr-4 h-12 w-12"></i>
+                    <h2 class="text-3xl font-bold text-white">GDPR Data Privacy Consent</h2>
+                </div>
+                <p class="text-blue-100 mt-2">Understand and manage your data privacy preferences</p>
             </div>
-            <div class="form-group">
-                <label for="dataTypes">Types of Data Collected</label>
-                <select multiple id="dataTypes" class="form-control">
-                    <option value="name">Name</option>
-                    <option value="email">Email</option>
-                    <option value="address">Address</option>
-                    <option value="phone">Phone Number</option>
-                </select>
+
+            <form id="gdprForm" class="p-8 space-y-6">
+                <!-- Data Consent Section -->
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <div class="flex items-center">
+                        <input 
+                            type="checkbox" 
+                            id="dataConsent" 
+                            class="form-checkbox h-5 w-5 text-blue-600 mr-3"
+                            required
+                        >
+                        <label for="dataConsent" class="flex-1 text-gray-700 font-medium">
+                            I consent to the collection and processing of my personal data
+                            <span class="tooltip ml-2" data-feather="info">
+                                <span class="tooltiptext">
+                                    By checking this box, you agree to our data processing terms. 
+                                    You can withdraw consent at any time.
+                                </span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Data Types Selection -->
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2">
+                        Select Types of Data to be Collected
+                    </label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center">
+                            <input 
+                                type="checkbox" 
+                                id="nameData" 
+                                value="name" 
+                                class="form-checkbox text-blue-600 mr-2"
+                            >
+                            <label for="nameData">Name</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input 
+                                type="checkbox" 
+                                id="emailData" 
+                                value="email" 
+                                class="form-checkbox text-blue-600 mr-2"
+                            >
+                            <label for="emailData">Email</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input 
+                                type="checkbox" 
+                                id="addressData" 
+                                value="address" 
+                                class="form-checkbox text-blue-600 mr-2"
+                            >
+                            <label for="addressData">Address</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input 
+                                type="checkbox" 
+                                id="phoneData" 
+                                value="phone" 
+                                class="form-checkbox text-blue-600 mr-2"
+                            >
+                            <label for="phoneData">Phone Number</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Purpose of Data Processing -->
+                <div>
+                    <label for="purposeConsent" class="block text-gray-700 font-bold mb-2">
+                        Purpose of Data Processing
+                    </label>
+                    <textarea 
+                        id="purposeConsent" 
+                        class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500" 
+                        rows="4" 
+                        placeholder="Describe the purpose of data collection and processing"
+                    ></textarea>
+                </div>
+
+                <!-- Data Retention Period -->
+                <div>
+                    <label for="dataRetention" class="block text-gray-700 font-bold mb-2">
+                        Data Retention Period
+                    </label>
+                    <div class="flex items-center">
+                        <input 
+                            type="range" 
+                            id="dataRetention" 
+                            min="1" 
+                            max="10" 
+                            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                        >
+                        <span id="retentionYears" class="ml-4 text-gray-700">5 Years</span>
+                    </div>
+                </div>
+
+                <!-- Consent Buttons -->
+                <div class="flex space-x-4">
+                    <button 
+                        type="submit" 
+                        class="flex-1 bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-300 flex items-center justify-center"
+                    >
+                        <i data-feather="check-circle" class="mr-2"></i>
+                        Submit GDPR Consent
+                    </button>
+                    <button 
+                        type="button" 
+                        class="flex-1 bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition duration-300 flex items-center justify-center"
+                    >
+                        <i data-feather="x-circle" class="mr-2"></i>
+                        Decline Consent
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Compliance Information Section -->
+        <div class="mt-6 bg-white p-6 rounded-lg shadow-lg text-center">
+            <h3 class="text-xl font-semibold mb-4">Your Data Privacy Rights</h3>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <i data-feather="eye-off" class="mx-auto h-12 w-12 text-green-600 mb-3"></i>
+                    <h4 class="font-bold">Right to Access</h4>
+                    <p class="text-sm text-gray-600">View your collected personal data</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <i data-feather="trash-2" class="mx-auto h-12 w-12 text-blue-600 mb-3"></i>
+                    <h4 class="font-bold">Right to Erasure</h4>
+                    <p class="text-sm text-gray-600">Request deletion of your data</p>
+                </div>
+                <div class="bg-yellow-50 p-4 rounded-lg">
+                    <i data-feather="lock" class="mx-auto h-12 w-12 text-yellow-600 mb-3"></i>
+                    <h4 class="font-bold">Data Protection</h4>
+                    <p class="text-sm text-gray-600">Secure and confidential handling</p>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="purposeConsent">Purpose of Data Processing</label>
-                <textarea id="purposeConsent" class="form-control" rows="4"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="dataRetention">Data Retention Period</label>
-                <input type="number" id="dataRetention" class="form-control" min="1" max="10" placeholder="Years">
-            </div>
-            <button type="submit" class="btn">Submit GDPR Consent</button>
-        </form>
+        </div>
     </div>
-    <script src="scripts/gdprCompliance.js"></script>
+
+    <script>
+        // Feather Icons
+        feather.replace();
+
+        // Data Retention Slider
+        const retentionSlider = document.getElementById('dataRetention');
+        const retentionYears = document.getElementById('retentionYears');
+        
+        retentionSlider.addEventListener('input', function() {
+            retentionYears.textContent = `${this.value} Years`;
+        });
+
+        // Form Submission Handling
+        document.getElementById('gdprForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect selected data types
+            const dataTypes = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(checkbox => checkbox.value)
+                .filter(value => value !== 'on');
+            
+            const formData = {
+                dataConsent: document.getElementById('dataConsent').checked,
+                dataTypes: dataTypes,
+                purposeConsent: document.getElementById('purposeConsent').value,
+                dataRetention: document.getElementById('dataRetention').value
+            };
+
+            console.log('GDPR Consent Submitted:', formData);
+            alert('GDPR Consent Submitted Successfully!');
+        });
+    </script>
 </body>
 </html>

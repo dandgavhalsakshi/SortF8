@@ -12,7 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const existingLogs = JSON.parse(localStorage.getItem('termsAcceptanceLogs') || '[]');
         termsLogBody.innerHTML = '';
         existingLogs.forEach(log => {
-            addLogEntry(log);
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${log.name}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${log.email}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                        ${log.status === 'Accepted' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                        ${log.status}
+                    </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${log.date}</td>
+            `;
+            termsLogBody.appendChild(row);
         });
     }
 
@@ -73,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             addLogEntry(logData);
             alert('Terms and Conditions Accepted Successfully!');
             
-            // Optional: Reset form
+            // Reset form
             form.reset();
         }
     });
@@ -90,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             addLogEntry(logData);
             alert('Terms and Conditions Declined. You may not proceed.');
             
-            // Optional: Reset form
+            // Reset form
             form.reset();
         }
     });

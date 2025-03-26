@@ -4,23 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legal & Compliance Management</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        body {
+            background-color: #f4f7fa;
+        }
+        .sidebar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <nav class="sidebar">
-            <h1>Compliance Center</h1>
-            <ul>
-                <li><a href="terms-tracking.html">Terms Tracking</a></li>
-                <li><a href="gdpr-compliance.html">GDPR Compliance</a></li>
-                <li><a href="membership-agreements.html">Membership Agreements</a></li>
-                <li><a href="audit-logs.html">Audit Logs</a></li>
-            </ul>
-        </nav>
-        <main class="content">
-            <h2>Welcome to Legal Compliance Management</h2>
-            <p>Select a section from the sidebar to get started.</p>
+<body class="font-sans antialiased">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <div class="sidebar w-64 bg-indigo-700 text-white p-6 shadow-lg">
+            <div class="flex items-center mb-8">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <h1 class="text-2xl font-bold">Compliance Center</h1>
+            </div>
+            <nav>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="terms-tracking.html" class="flex items-center p-3 hover:bg-indigo-600 rounded-lg transition duration-300">
+                            <i data-feather="file-text" class="mr-3"></i>
+                            Terms Tracking
+                        </a>
+                    </li>
+                    <li>
+                        <a href="gdpr-compliance.html" class="flex items-center p-3 hover:bg-indigo-600 rounded-lg transition duration-300">
+                            <i data-feather="shield" class="mr-3"></i>
+                            GDPR Compliance
+                        </a>
+                    </li>
+                    <li>
+                        <a href="membership-agreements.html" class="flex items-center p-3 hover:bg-indigo-600 rounded-lg transition duration-300">
+                            <i data-feather="users" class="mr-3"></i>
+                            Membership Agreements
+                        </a>
+                    </li>
+                    <li>
+                        <a href="audit-logs.html" class="flex items-center p-3 hover:bg-indigo-600 rounded-lg transition duration-300">
+                            <i data-feather="list" class="mr-3"></i>
+                            Audit Logs
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-10 bg-gray-100">
+            <div class="max-w-7xl mx-auto">
+                <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+                    <div class="p-6 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+                        <h2 class="text-3xl font-bold mb-4">Welcome to Legal Compliance Management</h2>
+                        <p class="text-indigo-100">Streamline your legal and compliance processes with our comprehensive management system.</p>
+                    </div>
+                    
+                    <div class="p-6 grid md:grid-cols-3 gap-6">
+                        <!-- Quick Action Cards -->
+                        <div class="bg-blue-50 p-6 rounded-lg shadow-md card-hover transition duration-300">
+                            <div class="flex items-center mb-4">
+                                <i data-feather="file-plus" class="text-blue-600 mr-3 h-10 w-10"></i>
+                                <h3 class="text-xl font-semibold text-blue-800">New Compliance Record</h3>
+                            </div>
+                            <p class="text-blue-600 mb-4">Quickly add a new compliance tracking entry.</p>
+                            <a href="complianceTracking.html" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Create Record</a>
+                        </div>
+
+                        <div class="bg-green-50 p-6 rounded-lg shadow-md card-hover transition duration-300">
+                            <div class="flex items-center mb-4">
+                                <i data-feather="activity" class="text-green-600 mr-3 h-10 w-10"></i>
+                                <h3 class="text-xl font-semibold text-green-800">Compliance Dashboard</h3>
+                            </div>
+                            <p class="text-green-600 mb-4">View real-time compliance status and analytics.</p>
+                            <a href="dashboard.html" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">View Dashboard</a>
+                        </div>
+
+                        <div class="bg-red-50 p-6 rounded-lg shadow-md card-hover transition duration-300">
+                            <div class="flex items-center mb-4">
+                                <i data-feather="alert-triangle" class="text-red-600 mr-3 h-10 w-10"></i>
+                                <h3 class="text-xl font-semibold text-red-800">Pending Reviews</h3>
+                            </div>
+                            <p class="text-red-600 mb-4">Check documents requiring immediate attention.</p>
+                            <a href="pending-reviews.html" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Review Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity Section -->
+                <div class="mt-8 bg-white shadow-lg rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Recent Compliance Activities</h3>
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 p-4 rounded-lg flex items-center">
+                            <i data-feather="check-circle" class="text-green-500 mr-4"></i>
+                            <div>
+                                <p class="font-medium">GDPR Compliance Review Completed</p>
+                                <p class="text-gray-500 text-sm">June 15, 2024 - Internal Audit Team</p>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg flex items-center">
+                            <i data-feather="file-text" class="text-blue-500 mr-4"></i>
+                            <div>
+                                <p class="font-medium">New Membership Agreement Drafted</p>
+                                <p class="text-gray-500 text-sm">June 10, 2024 - Legal Department</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
+
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+    </script>
 </body>
 </html>
