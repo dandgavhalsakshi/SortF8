@@ -1,34 +1,198 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legal & Compliance Management</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <!-- Add Google Fonts link for all specified fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Montserrat:wght@400;600;800&family=Nunito:wght@400;600&family=Lexend:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=Roboto:wght@400;500&family=Lato:wght@400;700&family=Bebas+Neue&family=Open+Sans:wght@400;600&family=Lora:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        /* Light Theme Variables - Beige/Cream Base */
+        :root {
+            --base-bg: #F4EBDC;
+            --card-bg: #FFFFFF;
+            --primary: #3A506B;
+            --secondary: #8B5E3B;
+            --accent: #B56576;
+            --text-primary: #264653;
+            --text-secondary: #6C757D;
+            --neutral-soft: #D8C3A5;
+            --neutral-medium: #A9927D;
+            --neutral-dark: #8E7B6D;
+            --highlight: #E29578;
+            --card-hover-shadow: rgba(139, 94, 59, 0.2);
+            --activity-bg: #F7F3ED;
+            
+            /* Font variables */
+            --font-title: 'Space Grotesk', 'Montserrat', sans-serif;
+            --font-subtitle: 'Nunito', sans-serif;
+            --font-heading: 'Lexend', 'Inter', 'Montserrat', sans-serif;
+            --font-subheading: 'Poppins', 'Roboto', 'Lato', sans-serif;
+            --font-section: 'Bebas Neue', sans-serif;
+            --font-body: 'Open Sans', 'Lora', serif;
+            --font-quote: 'Playfair Display', 'Cormorant Garamond', serif;
+            --font-caption: 'Source Sans Pro', sans-serif;
+        }
+
+        /* Dark Theme Variables - Charcoal Blue Base */
+        html.dark {
+            --base-bg: #283953;
+            --card-bg: #3B4F71;
+            --primary: #4A5A75; 
+            --secondary: #2A9D8F;
+            --accent: #F4A261;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0BEC5;
+            --neutral-soft: #7289A4;
+            --neutral-medium: #556B8C;
+            --neutral-dark: #1F2C3F;
+            --highlight: #FFD166;
+            --card-hover-shadow: rgba(244, 162, 97, 0.3);
+            --activity-bg: #3B4F71;
+        }
+
         body {
-            background-color: #f4f7fa;
+            background-color: var(--base-bg);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: var(--font-body);
         }
+
+        /* Title styling - Main brand name & logos */
+        .brand-title {
+            font-family: var(--font-title);
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        /* Subtitle styling - Taglines & supporting titles */
+        .subtitle {
+            font-family: var(--font-subtitle);
+            font-weight: 400;
+        }
+
+        /* Heading styling - H1, H2, H3 */
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+
+        /* Subheading styling - H4, H5, H6 */
+        h4, h5, h6 {
+            font-family: var(--font-subheading);
+            font-weight: 500;
+        }
+
+        /* Section headers styling */
+        .section-header {
+            font-family: var(--font-section);
+            letter-spacing: 1px;
+        }
+
+        /* Body text styling */
+        p {
+            font-family: var(--font-body);
+        }
+
+        /* Quote styling */
+        blockquote, .quote {
+            font-family: var(--font-quote);
+            font-style: italic;
+        }
+
+        /* Caption styling */
+        .caption, small, .text-sm {
+            font-family: var(--font-caption);
+        }
+
         .sidebar {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
         }
+
         .card-hover:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px var(--card-hover-shadow);
+        }
+
+        .theme-card {
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .activity-item {
+            background-color: var(--activity-bg);
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle {
+            width: 60px;
+            height: 30px;
+            border-radius: 15px;
+            background-color: var(--neutral-medium);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .toggle-thumb {
+            position: absolute;
+            left: 4px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-color: white;
+            transition: transform 0.3s ease;
+        }
+
+        html.dark .toggle-thumb {
+            transform: translateX(30px);
+        }
+
+        .header-gradient {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            font-family: var(--font-subheading);
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+        }
+
+        .text-theme-secondary {
+            color: var(--text-secondary);
+        }
+
+        /* Navigation items styling */
+        nav a {
+            font-family: var(--font-subheading);
+            font-weight: 500;
         }
     </style>
 </head>
-<body class="font-sans antialiased">
+<body>
     <div class="flex min-h-screen">
         <!-- Sidebar -->
-        <div class="sidebar w-64 bg-indigo-700 text-white p-6 shadow-lg">
+        <div class="sidebar w-64 text-white p-6 shadow-lg">
             <div class="flex items-center mb-8">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
-                <h1 class="text-2xl font-bold">Compliance Center</h1>
+                <h1 class="text-2xl brand-title">Compliance Center</h1>
             </div>
+
             <nav>
                 <ul class="space-y-2">
                     <li>
@@ -60,61 +224,74 @@
         </div>
 
         <!-- Main Content -->
-        <main class="flex-1 p-10 bg-gray-100">
+        <main class="flex-1 p-10">
+            <!-- Top Nav with Theme Toggle -->
+            <div class="flex justify-end mb-6">
+                <div class="flex items-center">
+                    <span class="mr-3 text-sm font-medium caption">Light</span>
+                    <div id="theme-toggle" class="theme-toggle">
+                        <i data-feather="sun" class="h-4 w-4 text-yellow-300"></i>
+                        <i data-feather="moon" class="h-4 w-4 text-blue-300"></i>
+                        <div class="toggle-thumb"></div>
+                    </div>
+                    <span class="ml-3 text-sm font-medium caption">Dark</span>
+                </div>
+            </div>
+
             <div class="max-w-7xl mx-auto">
-                <div class="bg-white shadow-xl rounded-lg overflow-hidden">
-                    <div class="p-6 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
-                        <h2 class="text-3xl font-bold mb-4">Welcome to Legal Compliance Management</h2>
-                        <p class="text-indigo-100">Streamline your legal and compliance processes with our comprehensive management system.</p>
+                <div class="theme-card shadow-xl rounded-lg overflow-hidden">
+                    <div class="p-6 header-gradient text-white">
+                        <h2 class="text-3xl mb-4 brand-title">Welcome to Legal Compliance Management</h2>
+                        <p class="text-indigo-100 subtitle">Streamline your legal and compliance processes with our comprehensive management system.</p>
                     </div>
                     
                     <div class="p-6 grid md:grid-cols-3 gap-6">
                         <!-- Quick Action Cards -->
-                        <div class="bg-blue-50 p-6 rounded-lg shadow-md card-hover transition duration-300">
+                        <div class="bg-blue-50 dark:bg-neutral-dark p-6 rounded-lg shadow-md card-hover transition duration-300">
                             <div class="flex items-center mb-4">
-                                <i data-feather="file-plus" class="text-blue-600 mr-3 h-10 w-10"></i>
-                                <h3 class="text-xl font-semibold text-blue-800">New Compliance Record</h3>
+                                <i data-feather="file-plus" class="text-blue-600 dark:text-accent mr-3 h-10 w-10"></i>
+                                <h3 class="text-xl font-semibold text-blue-800 dark:text-white">New Compliance Record</h3>
                             </div>
-                            <p class="text-blue-600 mb-4">Quickly add a new compliance tracking entry.</p>
-                            <a href="complianceTracking.html" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Create Record</a>
+                            <p class="text-blue-600 dark:text-neutral-soft mb-4">Quickly add a new compliance tracking entry.</p>
+                            <a href="complianceTracking.html" class="btn-primary px-4 py-2 rounded transition">Create Record</a>
                         </div>
 
-                        <div class="bg-green-50 p-6 rounded-lg shadow-md card-hover transition duration-300">
+                        <div class="bg-green-50 dark:bg-neutral-dark p-6 rounded-lg shadow-md card-hover transition duration-300">
                             <div class="flex items-center mb-4">
-                                <i data-feather="activity" class="text-green-600 mr-3 h-10 w-10"></i>
-                                <h3 class="text-xl font-semibold text-green-800">Compliance Dashboard</h3>
+                                <i data-feather="activity" class="text-green-600 dark:text-secondary mr-3 h-10 w-10"></i>
+                                <h3 class="text-xl font-semibold text-green-800 dark:text-white">Compliance Dashboard</h3>
                             </div>
-                            <p class="text-green-600 mb-4">View real-time compliance status and analytics.</p>
-                            <a href="dashboard.html" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">View Dashboard</a>
+                            <p class="text-green-600 dark:text-neutral-soft mb-4">View real-time compliance status and analytics.</p>
+                            <a href="dashboard.html" class="btn-primary px-4 py-2 rounded transition">View Dashboard</a>
                         </div>
 
-                        <div class="bg-red-50 p-6 rounded-lg shadow-md card-hover transition duration-300">
+                        <div class="bg-red-50 dark:bg-neutral-dark p-6 rounded-lg shadow-md card-hover transition duration-300">
                             <div class="flex items-center mb-4">
-                                <i data-feather="alert-triangle" class="text-red-600 mr-3 h-10 w-10"></i>
-                                <h3 class="text-xl font-semibold text-red-800">Pending Reviews</h3>
+                                <i data-feather="alert-triangle" class="text-red-600 dark:text-highlight mr-3 h-10 w-10"></i>
+                                <h3 class="text-xl font-semibold text-red-800 dark:text-white">Pending Reviews</h3>
                             </div>
-                            <p class="text-red-600 mb-4">Check documents requiring immediate attention.</p>
-                            <a href="pending-reviews.html" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Review Now</a>
+                            <p class="text-red-600 dark:text-neutral-soft mb-4">Check documents requiring immediate attention.</p>
+                            <a href="pending-reviews.html" class="btn-primary px-4 py-2 rounded transition">Review Now</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Recent Activity Section -->
-                <div class="mt-8 bg-white shadow-lg rounded-lg p-6">
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Recent Compliance Activities</h3>
+                <div class="mt-8 theme-card shadow-lg rounded-lg p-6">
+                    <h3 class="text-2xl section-header mb-4">Recent Compliance Activities</h3>
                     <div class="space-y-4">
-                        <div class="bg-gray-50 p-4 rounded-lg flex items-center">
-                            <i data-feather="check-circle" class="text-green-500 mr-4"></i>
+                        <div class="activity-item p-4 rounded-lg flex items-center">
+                            <i data-feather="check-circle" class="text-green-500 dark:text-secondary mr-4"></i>
                             <div>
                                 <p class="font-medium">GDPR Compliance Review Completed</p>
-                                <p class="text-gray-500 text-sm">June 15, 2024 - Internal Audit Team</p>
+                                <p class="text-theme-secondary text-sm caption">June 15, 2024 - Internal Audit Team</p>
                             </div>
                         </div>
-                        <div class="bg-gray-50 p-4 rounded-lg flex items-center">
-                            <i data-feather="file-text" class="text-blue-500 mr-4"></i>
+                        <div class="activity-item p-4 rounded-lg flex items-center">
+                            <i data-feather="file-text" class="text-blue-500 dark:text-accent mr-4"></i>
                             <div>
                                 <p class="font-medium">New Membership Agreement Drafted</p>
-                                <p class="text-gray-500 text-sm">June 10, 2024 - Legal Department</p>
+                                <p class="text-theme-secondary text-sm caption">June 10, 2024 - Legal Department</p>
                             </div>
                         </div>
                     </div>
@@ -126,6 +303,34 @@
     <script>
         // Initialize Feather Icons
         feather.replace();
+
+        // Theme Toggle Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+            
+            // Check for saved theme preference or use preferred color scheme
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme) {
+                htmlElement.classList.toggle('dark', savedTheme === 'dark');
+            } else {
+                // Use system preference as default
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                htmlElement.classList.toggle('dark', prefersDark);
+            }
+            
+            // Toggle theme when button is clicked
+            themeToggle.addEventListener('click', function() {
+                const isDark = htmlElement.classList.toggle('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                
+                // Refresh feather icons after theme change to ensure they're visible
+                setTimeout(() => {
+                    feather.replace();
+                }, 100);
+            });
+        });
     </script>
 </body>
 </html>

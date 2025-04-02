@@ -1,61 +1,263 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Membership Agreement</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <!-- Add Google Fonts link for all specified fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Montserrat:wght@400;600;800&family=Nunito:wght@400;600&family=Lexend:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=Roboto:wght@400;500&family=Lato:wght@400;700&family=Bebas+Neue&family=Open+Sans:wght@400;600&family=Lora:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: #f4f4f4;
+        /* Light Theme Variables - Beige/Cream Base */
+        :root {
+            --base-bg: #F4EBDC;
+            --card-bg: #FFFFFF;
+            --primary: #3A506B;
+            --secondary: #8B5E3B;
+            --accent: #B56576;
+            --text-primary: #264653;
+            --text-secondary: #6C757D;
+            --neutral-soft: #D8C3A5;
+            --neutral-medium: #A9927D;
+            --neutral-dark: #8E7B6D;
+            --highlight: #E29578;
+            --card-hover-shadow: rgba(139, 94, 59, 0.2);
+            --gradient-start: #8B5E3B;
+            --gradient-end: #B56576;
+            
+            /* Font variables */
+            --font-title: 'Space Grotesk', 'Montserrat', sans-serif;
+            --font-subtitle: 'Nunito', sans-serif;
+            --font-heading: 'Lexend', 'Inter', 'Montserrat', sans-serif;
+            --font-subheading: 'Poppins', 'Roboto', 'Lato', sans-serif;
+            --font-section: 'Bebas Neue', sans-serif;
+            --font-body: 'Open Sans', 'Lora', serif;
+            --font-quote: 'Playfair Display', 'Cormorant Garamond', serif;
+            --font-caption: 'Source Sans Pro', sans-serif;
         }
+
+        /* Dark Theme Variables - Charcoal Blue Base */
+        html.dark {
+            --base-bg: #283953;
+            --card-bg: #3B4F71;
+            --primary: #4A5A75; 
+            --secondary: #2A9D8F;
+            --accent: #F4A261;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0BEC5;
+            --neutral-soft: #7289A4;
+            --neutral-medium: #556B8C;
+            --neutral-dark: #1F2C3F;
+            --highlight: #FFD166;
+            --card-hover-shadow: rgba(244, 162, 97, 0.3);
+            --gradient-start: #F4A261;
+            --gradient-end: #2A9D8F;
+        }
+
+        body {
+            background-color: var(--base-bg);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: var(--font-body);
+        }
+
+        /* Title styling - Main brand name & logos */
+        .brand-title {
+            font-family: var(--font-title);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Subtitle styling - Taglines & supporting titles */
+        .subtitle {
+            font-family: var(--font-subtitle);
+            font-weight: 400;
+        }
+
+        /* Heading styling - H1, H2, H3 */
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+
+        /* Subheading styling - H4, H5, H6 */
+        h4, h5, h6 {
+            font-family: var(--font-subheading);
+            font-weight: 500;
+        }
+
+        /* Section headers styling */
+        .section-header {
+            font-family: var(--font-section);
+            letter-spacing: 1px;
+        }
+
+        /* Body text styling */
+        p {
+            font-family: var(--font-body);
+        }
+
+        /* Quote styling */
+        blockquote, .quote {
+            font-family: var(--font-quote);
+            font-style: italic;
+        }
+
+        /* Caption styling */
+        .caption, small, .text-sm {
+            font-family: var(--font-caption);
+        }
+
+        .theme-card {
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .theme-toggle {
+            width: 60px;
+            height: 30px;
+            border-radius: 15px;
+            background-color: var(--neutral-medium);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .toggle-thumb {
+            position: absolute;
+            left: 4px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-color: white;
+            transition: transform 0.3s ease;
+        }
+
+        html.dark .toggle-thumb {
+            transform: translateX(30px);
+        }
+
         .gradient-border {
             border: 2px solid transparent;
-            border-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            border-image: linear-gradient(to right, var(--gradient-start) 0%, var(--gradient-end) 100%);
             border-image-slice: 1;
         }
+
+        .theme-gradient {
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+        }
+
+        .btn-primary {
+            background-image: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            color: white;
+            font-family: var(--font-subheading);
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .text-theme-secondary {
+            color: var(--text-secondary);
+        }
+
+        .text-gradient {
+            background-image: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
         .agreement-scroll {
             scrollbar-width: thin;
-            scrollbar-color: #6a11cb #e0e0e0;
+            scrollbar-color: var(--primary) var(--neutral-soft);
         }
+        
         .agreement-scroll::-webkit-scrollbar {
             width: 8px;
         }
+        
         .agreement-scroll::-webkit-scrollbar-track {
-            background: #e0e0e0;
+            background: var(--neutral-soft);
         }
+        
         .agreement-scroll::-webkit-scrollbar-thumb {
-            background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            background-image: linear-gradient(to bottom, var(--gradient-start) 0%, var(--gradient-end) 100%);
             border-radius: 10px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(181, 101, 118, 0.2);
+        }
+
+        html.dark input:focus, html.dark select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(244, 162, 97, 0.2);
+        }
+
+        input, select, .form-field {
+            border-color: var(--neutral-medium);
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+        }
+
+        .checkbox-custom {
+            accent-color: var(--accent);
+        }
+
+        label {
+            font-family: var(--font-subheading);
         }
     </style>
 </head>
 <body class="antialiased">
-    <div class="min-h-screen flex items-center justify-center px-4 py-8">
-        <div class="w-full max-w-2xl bg-white shadow-2xl rounded-2xl overflow-hidden gradient-border p-1">
-            <div class="p-8 bg-white">
-                <h2 class="text-3xl font-extrabold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500">
+    <div class="min-h-screen flex flex-col items-center justify-center px-4 py-8">
+        <!-- Theme Toggle -->
+        <div class="absolute top-4 right-4 flex items-center">
+            <span class="mr-3 text-sm font-medium caption">Light</span>
+            <div id="theme-toggle" class="theme-toggle">
+                <i data-feather="sun" class="h-4 w-4 text-yellow-300"></i>
+                <i data-feather="moon" class="h-4 w-4 text-blue-300"></i>
+                <div class="toggle-thumb"></div>
+            </div>
+            <span class="ml-3 text-sm font-medium caption">Dark</span>
+        </div>
+
+        <div class="w-full max-w-2xl theme-card shadow-2xl rounded-2xl overflow-hidden gradient-border p-1">
+            <div class="p-8">
+                <h2 class="text-3xl brand-title mb-6 text-center text-gradient">
                     Digital Membership Agreement
                 </h2>
 
                 <form id="membershipForm" class="space-y-6">
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
-                            <label for="memberName" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                            <label for="memberName" class="block text-sm font-medium mb-2">Full Name</label>
                             <input 
                                 type="text" 
                                 id="memberName" 
                                 required 
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none transition duration-300 form-field"
                                 placeholder="Enter your full name"
                             >
                         </div>
                         <div>
-                            <label for="memberType" class="block text-sm font-medium text-gray-700 mb-2">Membership Type</label>
+                            <label for="memberType" class="block text-sm font-medium mb-2">Membership Type</label>
                             <select 
                                 id="memberType" 
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+                                class="w-full px-4 py-2 border rounded-lg focus:outline-none transition duration-300 form-field"
                             >
                                 <option value="standard">Standard Membership</option>
                                 <option value="premium">Premium Membership</option>
@@ -65,10 +267,11 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Membership Agreement</label>
+                        <label class="block text-sm font-medium mb-2">Membership Agreement</label>
                         <div 
                             id="agreementText"
-                            class="h-48 overflow-y-auto border border-gray-300 rounded-lg p-4 agreement-scroll bg-gray-50 text-sm text-gray-700"
+                            class="h-48 overflow-y-auto border rounded-lg p-4 agreement-scroll text-sm"
+                            style="background-color: var(--neutral-soft); color: var(--text-primary);"
                         >
                             <h3 class="font-semibold mb-2">Terms and Conditions</h3>
                             <p>Welcome to our membership program. By signing this agreement, you agree to the following terms:</p>
@@ -78,7 +281,7 @@
                                 <li>Keep your contact information up to date</li>
                                 <li>Respect the community standards</li>
                             </ul>
-                            <p class="mt-2 italic text-gray-500">Please scroll and read the full agreement carefully.</p>
+                            <p class="mt-2 italic" style="color: var(--text-secondary);">Please scroll and read the full agreement carefully.</p>
                         </div>
                     </div>
 
@@ -87,19 +290,20 @@
                             type="checkbox" 
                             id="agreementAccept" 
                             required 
-                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                            class="h-4 w-4 checkbox-custom border-gray-300 rounded"
                         >
-                        <label for="agreementAccept" class="ml-2 block text-sm text-gray-900">
+                        <label for="agreementAccept" class="ml-2 block text-sm">
                             I have read and agree to the membership terms
                         </label>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Digital Signature</label>
+                        <label class="block text-sm font-medium mb-2">Digital Signature</label>
                         <div class="relative">
                             <canvas 
                                 id="signatureCanvas" 
-                                class="w-full h-40 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50"
+                                class="w-full h-40 border-2 border-dashed rounded-lg"
+                                style="border-color: var(--neutral-medium); background-color: var(--neutral-soft);"
                             ></canvas>
                             <div class="absolute top-2 right-2">
                                 <button 
@@ -110,14 +314,14 @@
                                     Clear
                                 </button>
                             </div>
-                            <p class="text-xs text-gray-500 mt-1">Sign inside the box above</p>
+                            <p class="text-xs mt-1 caption" style="color: var(--text-secondary);">Sign inside the box above</p>
                         </div>
                     </div>
 
                     <div class="text-center">
                         <button 
                             type="submit" 
-                            class="w-full py-3 px-6 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-bold rounded-lg hover:from-purple-700 hover:to-blue-600 transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            class="w-full py-3 px-6 btn-primary font-bold rounded-lg transition duration-300 transform hover:scale-105 focus:outline-none"
                         >
                             Submit Membership Agreement
                         </button>
@@ -128,30 +332,70 @@
     </div>
 
     <script>
+        // Initialize Feather Icons
         document.addEventListener('DOMContentLoaded', function() {
-            const canvas = document.getElementById('signatureCanvas');
-            const signaturePad = new SignaturePad(canvas, {
-                penColor: 'rgb(0, 0, 0)',
-                backgroundColor: 'rgb(250, 250, 250)'
+            feather.replace();
+            
+            // Theme Toggle Functionality
+            const themeToggle = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+            
+            // Check for saved theme preference or use preferred color scheme
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme) {
+                htmlElement.classList.toggle('dark', savedTheme === 'dark');
+            } else {
+                // Use system preference as default
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                htmlElement.classList.toggle('dark', prefersDark);
+            }
+            
+            // Toggle theme when button is clicked
+            themeToggle.addEventListener('click', function() {
+                const isDark = htmlElement.classList.toggle('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                
+                // Refresh feather icons after theme change to ensure they're visible
+                setTimeout(() => {
+                    feather.replace();
+                }, 100);
+                
+                // Reinitialize signature pad with updated colors
+                initSignaturePad();
             });
-
-            // Adjust canvas resolution
-            function resizeCanvas() {
+            
+            // Initialize signature pad
+            const canvas = document.getElementById('signatureCanvas');
+            let signaturePad;
+            
+            function initSignaturePad() {
+                if (signaturePad) {
+                    signaturePad.clear();
+                }
+                
+                const isDark = htmlElement.classList.contains('dark');
+                signaturePad = new SignaturePad(canvas, {
+                    penColor: isDark ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)',
+                    backgroundColor: 'transparent'
+                });
+                
+                // Adjust canvas resolution
                 const ratio = Math.max(window.devicePixelRatio || 1, 1);
                 canvas.width = canvas.offsetWidth * ratio;
                 canvas.height = canvas.offsetHeight * ratio;
                 canvas.getContext('2d').scale(ratio, ratio);
                 signaturePad.clear();
             }
-
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-
+            
+            initSignaturePad();
+            window.addEventListener('resize', initSignaturePad);
+            
             const clearButton = document.getElementById('clearSignature');
             clearButton.addEventListener('click', () => {
                 signaturePad.clear();
             });
-
+            
             const form = document.getElementById('membershipForm');
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
