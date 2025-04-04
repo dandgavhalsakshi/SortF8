@@ -5,63 +5,309 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms and Conditions Management</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@400;700&family=Inter:wght@400;700&family=Lato:wght@400;700&family=Lexend:wght@400;700&family=Lora:wght@400;700&family=Montserrat:wght@400;700;800&family=Nunito:wght@400;700&family=Open+Sans:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;700&family=Roboto:wght@400;700&family=Source+Sans+Pro:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            /* Light Theme Colors */
+            --light-base: #F4EBDC;
+            --light-primary: #3A506B;
+            --light-secondary: #6C757D;
+            --light-accent: #B08968;
+            --light-text: #333333;
+            --light-text-secondary: #555555;
+            --light-border: #e2e8f0;
+            --light-bg-secondary: #f8fafc;
+
+            /* Dark Theme Colors */
+            --dark-base: #283953;
+            --dark-primary: #F4A261;
+            --dark-secondary: #2A9D8F;
+            --dark-accent: #E9C46A;
+            --dark-text: #FFFFFF;
+            --dark-text-secondary: #D1D5DB;
+            --dark-border: #4A5A75;
+            --dark-bg-secondary: #1E2C40;
+        }
+
+        body.light-theme {
+            background-color: var(--light-base);
+            color: var(--light-text);
+        }
+
+        body.dark-theme {
+            background-color: var(--dark-base);
+            color: var(--dark-text);
+        }
+
+        /* Fonts */
+        .title {
+            font-family: 'Space Grotesk', 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .heading {
+            font-family: 'Lexend', 'Inter', 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        .subheading {
+            font-family: 'Poppins', 'Roboto', 'Lato', sans-serif;
+            font-weight: 500;
+        }
+
+        .section-header {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .body-text {
+            font-family: 'Open Sans', 'Lora', sans-serif;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        .caption-text {
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        /* Theme-specific styles */
+        .card {
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme .card {
+            background-color: #FFFFFF;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-theme .card {
+            background-color: var(--dark-bg-secondary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        body.light-theme .btn-primary {
+            background-color: var(--light-primary);
+        }
+
+        body.dark-theme .btn-primary {
+            background-color: var(--dark-primary);
+            color: var(--dark-base);
+        }
+
+        body.light-theme .btn-secondary {
+            background-color: var(--light-secondary);
+        }
+
+        body.dark-theme .btn-secondary {
+            background-color: var(--dark-secondary);
+        }
+
+        body.light-theme .btn-danger {
+            background-color: #A4161A;
+        }
+
+        body.dark-theme .btn-danger {
+            background-color: #EF476F;
+        }
+
+        body.light-theme .terms-scroll {
+            background-color: var(--light-bg-secondary);
+            border-color: var(--light-border);
+        }
+
+        body.dark-theme .terms-scroll {
+            background-color: var(--dark-bg-secondary);
+            border-color: var(--dark-border);
+        }
+
+        body.light-theme .header-text {
+            color: var(--light-primary);
+        }
+
+        body.dark-theme .header-text {
+            color: var(--dark-primary);
+        }
+
         .terms-scroll {
             max-height: 300px;
             overflow-y: auto;
-            border: 1px solid #e2e8f0;
             padding: 15px;
-            background-color: #f8fafc;
+            transition: all 0.3s ease;
         }
+
         #termsLog {
-    min-width: 800px; /* Ensures horizontal scrolling on smaller screens */
-}
+            min-width: 800px; /* Ensures horizontal scrolling on smaller screens */
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Theme switch styles */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--light-secondary);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--dark-primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+
+        /* Input field styles */
+        body.light-theme input[type="text"],
+        body.light-theme input[type="email"] {
+            border-color: var(--light-border);
+            background-color: white;
+        }
+
+        body.dark-theme input[type="text"],
+        body.dark-theme input[type="email"] {
+            border-color: var(--dark-border);
+            background-color: var(--dark-bg-secondary);
+            color: var(--dark-text);
+        }
+
+        /* Table styles */
+        body.light-theme thead {
+            background-color: var(--light-bg-secondary);
+        }
+
+        body.dark-theme thead {
+            background-color: var(--dark-bg-secondary);
+        }
+
+        body.light-theme tbody {
+            background-color: white;
+        }
+
+        body.dark-theme tbody {
+            background-color: var(--dark-base);
+        }
+
+        body.dark-theme th {
+            color: var(--dark-text);
+        }
+
+        body.light-theme .table-row-alt:nth-child(even) {
+            background-color: var(--light-bg-secondary);
+        }
+
+        body.dark-theme .table-row-alt:nth-child(even) {
+            background-color: #1E2C40;
+        }
+
+        body.light-theme .table-row-alt:nth-child(odd) {
+            background-color: white;
+        }
+
+        body.dark-theme .table-row-alt:nth-child(odd) {
+            background-color: var(--dark-base);
+        }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="light-theme">
+    <div class="theme-toggle">
+        <span class="caption-text"><i class="fas fa-sun"></i></span>
+        <label class="switch">
+            <input type="checkbox" id="themeSwitch">
+            <span class="slider"></span>
+        </label>
+        <span class="caption-text"><i class="fas fa-moon"></i></span>
+    </div>
+
     <div class="container mx-auto px-4 py-8">
-        <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="max-w-2xl mx-auto card rounded-lg overflow-hidden">
             <div class="p-6">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Terms and Conditions</h2>
+                <h2 class="title text-2xl mb-4 header-text">Terms and Conditions</h2>
                 
                 <div class="terms-scroll mb-4">
-                    <h3 class="text-lg font-semibold mb-2">Comprehensive Terms of Service</h3>
+                    <h3 class="section-header text-lg mb-2">Comprehensive Terms of Service</h3>
                     <div id="termsContent">
-                        <h4 class="font-medium mt-2">1. Acceptance of Terms</h4>
-                        <p class="text-sm text-gray-600 mb-2">By accessing and using our service, you agree to be bound by these terms and conditions.</p>
+                        <h4 class="subheading mt-2">1. Acceptance of Terms</h4>
+                        <p class="body-text mb-2">By accessing and using our service, you agree to be bound by these terms and conditions.</p>
                         
-                        <h4 class="font-medium mt-2">2. User Responsibilities</h4>
-                        <p class="text-sm text-gray-600 mb-2">Users are responsible for maintaining the confidentiality of their account and all activities under their account.</p>
+                        <h4 class="subheading mt-2">2. User Responsibilities</h4>
+                        <p class="body-text mb-2">Users are responsible for maintaining the confidentiality of their account and all activities under their account.</p>
                         
-                        <h4 class="font-medium mt-2">3. Privacy Policy</h4>
-                        <p class="text-sm text-gray-600 mb-2">We are committed to protecting your privacy. Please review our detailed privacy policy.</p>
+                        <h4 class="subheading mt-2">3. Privacy Policy</h4>
+                        <p class="body-text mb-2">We are committed to protecting your privacy. Please review our detailed privacy policy.</p>
                         
-                        <h4 class="font-medium mt-2">4. Intellectual Property</h4>
-                        <p class="text-sm text-gray-600 mb-2">All content on this platform is protected by intellectual property laws.</p>
+                        <h4 class="subheading mt-2">4. Intellectual Property</h4>
+                        <p class="body-text mb-2">All content on this platform is protected by intellectual property laws.</p>
                         
-                        <h4 class="font-medium mt-2">5. Limitation of Liability</h4>
-                        <p class="text-sm text-gray-600 mb-2">Our service is provided "as is" without any warranties, express or implied.</p>
+                        <h4 class="subheading mt-2">5. Limitation of Liability</h4>
+                        <p class="body-text mb-2">Our service is provided "as is" without any warranties, express or implied.</p>
                     </div>
                 </div>
 
                 <form id="termsAcceptanceForm" class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <label class="block caption-text font-medium">Full Name</label>
                         <input 
                             type="text" 
                             id="userName" 
                             required 
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            class="mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-opacity-50"
                         >
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Email Address</label>
+                        <label class="block caption-text font-medium">Email Address</label>
                         <input 
                             type="email" 
                             id="userEmail" 
                             required 
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            class="mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-opacity-50"
                         >
                     </div>
 
@@ -69,9 +315,9 @@
                         <input 
                             type="checkbox" 
                             id="termsCheckbox" 
-                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                            class="h-4 w-4 rounded"
                         >
-                        <label for="termsCheckbox" class="ml-2 block text-sm text-gray-900">
+                        <label for="termsCheckbox" class="ml-2 block body-text">
                             I have read, understood, and agree to the Terms and Conditions
                         </label>
                     </div>
@@ -80,14 +326,14 @@
                         <button 
                             type="button" 
                             id="acceptTerms" 
-                            class="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-300"
+                            class="w-full btn-primary text-white py-2 px-4 rounded hover:opacity-90 transition duration-300"
                         >
                             Accept Terms
                         </button>
                         <button 
                             type="button" 
                             id="declineTerms" 
-                            class="w-full bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300"
+                            class="w-full btn-danger text-white py-2 px-4 rounded hover:opacity-90 transition duration-300"
                         >
                             Decline Terms
                         </button>
@@ -96,30 +342,209 @@
             </div>
         </div>
 
-        <div class="max-w-2xl mx-auto mt-6 bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="max-w-2xl mx-auto mt-6 card rounded-lg overflow-hidden">
             <div class="p-6">
-                <h3 class="text-xl font-bold text-gray-800 mb-4">Terms Acceptance Log</h3>
-<div class="overflow-x-auto w-full">
-    <table id="termsLog" class="min-w-full divide-y divide-gray-200 w-full">
-        <thead class="bg-gray-50">
-            <tr>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Name</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Email</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Status</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Date</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Additional Info</th>
-                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">Actions</th>
-            </tr>
-        </thead>
-        <tbody id="termsLogBody" class="bg-white divide-y divide-gray-200">
-            <!-- Log entries will be dynamically added here -->
-        </tbody>
-    </table>
-</div>
+                <h3 class="heading text-xl mb-4 header-text">Terms Acceptance Log</h3>
+                <div class="overflow-x-auto w-full">
+                    <table id="termsLog" class="min-w-full divide-y divide-gray-200 w-full">
+                        <thead>
+                            <tr>
+                                <th class="px-6 py-3 text-left caption-text font-medium uppercase tracking-wider whitespace-nowrap">Name</th>
+                                <th class="px-6 py-3 text-left caption-text font-medium uppercase tracking-wider whitespace-nowrap">Email</th>
+                                <th class="px-6 py-3 text-left caption-text font-medium uppercase tracking-wider whitespace-nowrap">Status</th>
+                                <th class="px-6 py-3 text-left caption-text font-medium uppercase tracking-wider whitespace-nowrap">Date</th>
+                                <th class="px-6 py-3 text-left caption-text font-medium uppercase tracking-wider whitespace-nowrap">Additional Info</th>
+                                <th class="px-6 py-3 text-left caption-text font-medium uppercase tracking-wider whitespace-nowrap">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="termsLogBody" class="divide-y">
+                            <!-- Log entries will be dynamically added here -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="scripts/termsTracking.js"></script>
+    <script>
+        // Theme switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeSwitch = document.getElementById('themeSwitch');
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.remove('light-theme');
+                document.body.classList.add('dark-theme');
+                themeSwitch.checked = true;
+            }
+            
+            // Theme switch event listener
+            themeSwitch.addEventListener('change', function() {
+                if (this.checked) {
+                    document.body.classList.remove('light-theme');
+                    document.body.classList.add('dark-theme');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.body.classList.remove('dark-theme');
+                    document.body.classList.add('light-theme');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+            
+            // Terms acceptance functionality
+            const acceptTermsBtn = document.getElementById('acceptTerms');
+            const declineTermsBtn = document.getElementById('declineTerms');
+            const termsCheckbox = document.getElementById('termsCheckbox');
+            const userName = document.getElementById('userName');
+            const userEmail = document.getElementById('userEmail');
+            const termsLogBody = document.getElementById('termsLogBody');
+            
+            // Load existing logs from localStorage
+            loadTermsLog();
+            
+            acceptTermsBtn.addEventListener('click', function() {
+                if (!validateForm()) return;
+                
+                const status = termsCheckbox.checked ? 'Accepted' : 'Incomplete';
+                addLogEntry(userName.value, userEmail.value, status, 'Terms version 1.0');
+                
+                // Reset form
+                resetForm();
+            });
+            
+            declineTermsBtn.addEventListener('click', function() {
+                if (!validateForm(false)) return;
+                
+                addLogEntry(userName.value, userEmail.value, 'Declined', 'Terms version 1.0');
+                
+                // Reset form
+                resetForm();
+            });
+            
+            function validateForm(checkTerms = true) {
+                if (!userName.value) {
+                    alert('Please enter your name.');
+                    return false;
+                }
+                
+                if (!userEmail.value) {
+                    alert('Please enter your email.');
+                    return false;
+                }
+                
+                if (checkTerms && !termsCheckbox.checked) {
+                    alert('Please check the terms checkbox to proceed.');
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            function resetForm() {
+                userName.value = '';
+                userEmail.value = '';
+                termsCheckbox.checked = false;
+            }
+            
+            function addLogEntry(name, email, status, additionalInfo) {
+                const now = new Date();
+                const date = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+                
+                // Create log object
+                const logEntry = {
+                    name: name,
+                    email: email,
+                    status: status,
+                    date: date,
+                    additionalInfo: additionalInfo
+                };
+                
+                // Save to localStorage
+                const logs = JSON.parse(localStorage.getItem('termsLogs') || '[]');
+                logs.push(logEntry);
+                localStorage.setItem('termsLogs', JSON.stringify(logs));
+                
+                // Add to table
+                addLogToTable(logEntry, logs.length - 1);
+            }
+            
+            function loadTermsLog() {
+                const logs = JSON.parse(localStorage.getItem('termsLogs') || '[]');
+                logs.forEach((log, index) => {
+                    addLogToTable(log, index);
+                });
+            }
+            
+            function addLogToTable(log, index) {
+                const row = document.createElement('tr');
+                row.className = 'table-row-alt';
+                row.setAttribute('data-index', index);
+                
+                // Set row content
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap body-text">${log.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap body-text">${log.email}</td>
+                    <td class="px-6 py-4 whitespace-nowrap body-text">${getStatusBadge(log.status)}</td>
+                    <td class="px-6 py-4 whitespace-nowrap caption-text">${log.date}</td>
+                    <td class="px-6 py-4 whitespace-nowrap caption-text">${log.additionalInfo || '-'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <button class="delete-btn px-2 py-1 rounded text-white btn-danger" data-index="${index}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                
+                termsLogBody.appendChild(row);
+                
+                // Add event listener to delete button
+                row.querySelector('.delete-btn').addEventListener('click', function() {
+                    const entryIndex = this.getAttribute('data-index');
+                    deleteLogEntry(entryIndex);
+                });
+            }
+            
+            function getStatusBadge(status) {
+                let badgeClass = '';
+                let themeClass = document.body.classList.contains('dark-theme') ? 'dark-theme' : 'light-theme';
+                
+                switch(status) {
+                    case 'Accepted':
+                        badgeClass = 'bg-green-500';
+                        break;
+                    case 'Declined':
+                        badgeClass = 'bg-red-500';
+                        break;
+                    default:
+                        badgeClass = 'bg-yellow-500';
+                }
+                
+                return `<span class="px-2 py-1 text-xs rounded-full text-white ${badgeClass}">${status}</span>`;
+            }
+            
+            function deleteLogEntry(index) {
+                // Remove from localStorage
+                const logs = JSON.parse(localStorage.getItem('termsLogs') || '[]');
+                logs.splice(index, 1);
+                localStorage.setItem('termsLogs', JSON.stringify(logs));
+                
+                // Remove from table and re-render
+                termsLogBody.innerHTML = '';
+                logs.forEach((log, index) => {
+                    addLogToTable(log, index);
+                });
+            }
+            
+            // Update status badges when theme changes
+            themeSwitch.addEventListener('change', function() {
+                const statusCells = termsLogBody.querySelectorAll('tr td:nth-child(3)');
+                const logs = JSON.parse(localStorage.getItem('termsLogs') || '[]');
+                
+                statusCells.forEach((cell, index) => {
+                    cell.innerHTML = getStatusBadge(logs[index].status);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
