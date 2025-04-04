@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const formContainer = document.getElementById("form-container");
 
-    // Define form structures
     const forms = [
         {
             id: "feedback-form",
@@ -24,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ];
 
-    // Create forms dynamically
     forms.forEach(formData => {
         const form = createForm(formData);
         formContainer.appendChild(form);

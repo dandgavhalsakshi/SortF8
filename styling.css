@@ -2,7 +2,8 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #283953; /* Dark Theme Background */
+    color: #E9C46A; /* Neutral Support */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,37 +12,42 @@ body {
 }
 
 .container {
-    background-color: white;
+    background-color: #2A2E45; /* Slightly lighter than base */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     width: 90%;
     max-width: 450px;
+    color: #FFFFFF; /* Ensure text is readable */
 }
 
 h2, h3 {
     font-family: 'Montserrat', sans-serif;
     text-align: center;
+    color: #F4A261; /* Primary Accent */
 }
 
 label {
     display: block;
     margin-top: 10px;
     font-weight: bold;
+    color: #E9C46A; /* Neutral Support */
 }
 
 input, textarea, select {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
-    border: 1px solid #ccc;
+    border: 2px solid #2A9D8F; /* Secondary Accent */
     border-radius: 5px;
     font-size: 14px;
+    background-color: #3B4F71; /* Darker input field */
+    color: #FFFFFF;
 }
 
 button {
-    background-color: #007bff;
-    color: white;
+    background-color: #F4A261; /* Warm Sand Orange */
+    color: #283953;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -49,15 +55,17 @@ button {
     margin-top: 15px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: bold;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #E9C46A; /* Golden Beige */
+    color: #283953;
 }
 
 #response-message {
     text-align: center;
     margin-top: 10px;
     font-weight: bold;
-    color: green;
+    color: #06D6A0; /* High Contrast Success Message */
 }
