@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback & Survey</title>
+  <link id="theme-style" rel="stylesheet" href="light.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome to the Feedback & Survey Form</h2>
+
+    <!-- Theme Selection Section -->
+    <div class="theme-toggle">
+      <p>Select Theme:</p>
+      <button onclick="setTheme('light')">🌞 Light Theme</button>
+      <button onclick="setTheme('dark')">🌙 Dark Theme</button>
+    </div>
+
+    <!-- Container for Forms -->
+    <div id="form-container" style="display:none;"></div>
+
+    <!-- Feedback Message -->
+    <p id="response-message"></p>
+  </div>
+
+  <script src="java.js"></script>
+</body>
+</html>

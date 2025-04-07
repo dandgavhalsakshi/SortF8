@@ -1,0 +1,40 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #F4EBDC;
+    color: #3A506B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 450px;
+  }
+  
+  input, textarea, select {
+    background-color: #fff;
+    color: #3A506B;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    background-color: #E29578;
+    color: white;
+  }
+  
+  button:hover {
+    background-color: #B56576;
+  }
+  
+  .theme-toggle {
+    text-align: right;
+    margin-bottom: 10px;
+  }
+  
